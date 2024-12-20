@@ -109,8 +109,3 @@ class App:
                 messagebox.showinfo("Успех", "Данные загружены!")
             except FileNotFoundError:
                 messagebox.showerror("Ошибка", "Файл не найден.")
-
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = App(root)
-    root.mainloop()
