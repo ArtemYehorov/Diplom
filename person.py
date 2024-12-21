@@ -33,4 +33,4 @@ class Person:
         age = self.calculate_age()
         death_info = f"Умер(ла): {self.death_date}" if self.death_date else "Жив(а)"
         return f"{self.first_name} {self.last_name} {self.patronymic}, {age} лет, {gender_str}. " \
-               f"Родился: {self.birth_date}. {death_info}"
+               f"Родился(лась): {self.birth_date}. {death_info}"

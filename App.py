@@ -10,7 +10,9 @@ class App:
         self.root = root
         self.root.title("Управление данными о людях")
 
-        # Создаем кнопки
+        self.root.geometry("350x250")
+        self.root.resizable(False, False)
+
         tk.Button(root, text="Добавить запись", command=self.add_person).pack(pady=10)
         tk.Button(root, text="Найти запись", command=self.search_person).pack(pady=10)
         tk.Button(root, text="Сохранить в файл", command=self.save_to_file).pack(pady=10)
@@ -67,7 +69,7 @@ class App:
         tk.Button(add_window, text="Сохранить", command=save_person).grid(row=7, column=0, columnspan=2, pady=10)
 
     def search_person(self):
-        """Окно для поиска записей."""
+
         def perform_search():
             query = search_entry.get().lower()
             results = self.db.search(query)
@@ -79,9 +81,12 @@ class App:
                 result_text.delete("1.0", tk.END)
                 result_text.insert(tk.END, "Ничего не найдено.")
 
-        # Окно для поиска
+
         search_window = tk.Toplevel(self.root)
         search_window.title("Поиск записей")
+
+        search_window.resizable(False, False)
+        search_window.geometry("400x400")
 
         tk.Label(search_window, text="Введите запрос:").pack(pady=5)
         search_entry = tk.Entry(search_window)
@@ -89,8 +94,12 @@ class App:
 
         tk.Button(search_window, text="Поиск", command=perform_search).pack(pady=5)
 
-        result_text = tk.Text(search_window, height=15, width=50)
+        result_text = tk.Text(search_window, height=15, width=80)
         result_text.pack(pady=5)
+
+        scrollbar = tk.Scrollbar(search_window, command=result_text.yview)
+        result_text.config(yscrollcommand=scrollbar.set)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
     def save_to_file(self):
         """Сохранение данных в файл."""
